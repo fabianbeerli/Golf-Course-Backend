@@ -334,7 +334,7 @@ app.get('/api/holes/:id', async (req, res) => {
     let id = parseInt(req.params.id);
 
     try {
-        const collection = database.collection('holes');
+        const collection = database.collection('hole');
         const query = {
             'golf_course_fk': id
           };
