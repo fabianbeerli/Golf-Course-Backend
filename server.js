@@ -336,7 +336,7 @@ app.get('/api/holes/:id', async (req, res) => {
     try {
         const collection = database.collection('holes');
         const query = {
-            'golf_courses_fk': id
+            'golf_course_fk': id
           };
         const result = await collection.find(query).toArray();
 
