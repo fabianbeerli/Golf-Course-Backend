@@ -227,7 +227,7 @@ app.get('/api/playersforcourse/:id', async (req, res) => {
         const query = {
             'golf_courses.golf_course_id': id
           };
-        const result = await collection.findOne(query);
+        const result = await collection.find(query);
 
         if (!result) {
             let responseBody = {
