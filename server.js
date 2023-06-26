@@ -326,6 +326,36 @@ app.delete('/api/players/:id', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
+// Get player for specific golf course
+//--------------------------------------------------------------------------------------------------
+app.get('/api/holes/:id', async (req, res) => {
+
+    // read the path parameter :id
+    let id = parseInt(req.params.id);
+
+    try {
+        const collection = database.collection('holes');
+        const query = {
+            'golf_courses_fk': id
+          };
+        const result = await collection.find(query).toArray();
+
+
+        if (!result) {
+            let responseBody = {
+                status: "No holes for golf course with id: " + id
+            }
+            res.status(404).send(responseBody);
+        }
+        else {
+            res.send(result);
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
 // Start the server
 //--------------------------------------------------------------------------------------------------
 server.listen(port, () => console.log("app listening on port " + port));
