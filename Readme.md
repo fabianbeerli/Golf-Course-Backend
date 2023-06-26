@@ -1,4 +1,4 @@
-A sample REST API for a Music DB
+REST API For Golf Course App
 
 ## Get started
 
