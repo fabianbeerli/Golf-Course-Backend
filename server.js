@@ -86,86 +86,6 @@ app.get('/api/course/:id', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
-// Create a new golf course
-//--------------------------------------------------------------------------------------------------
-app.post('/api/courses', async (req, res) => {
-
-    try {
-        const collection = database.collection('golf_courses');
-
-        var course = {
-            golf_course_id: req.body.golf_course_id,
-            location: req.body.location,
-            size: req.body.size
-        };
-        const result = await collection.insertOne(course);
-
-        res.status(201).send({ _id: result.insertedId });
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-})
-
-//--------------------------------------------------------------------------------------------------
-// Update an existing golf course
-//--------------------------------------------------------------------------------------------------
-app.put('/api/courses/:id', async (req, res) => {
-
-    // read the path parameter :id
-    let id = req.params.id;
-    let course = req.body;
-    delete course._id; // delete the _id from the object, because the _id cannot be updated
-
-    try {
-        const collection = database.collection('golf_course');
-        const query = { golf_course_id: parseInt(id) }; // filter by id
-        const result = await collection.updateOne(query, { $set: course });
-
-        if (result.matchedCount === 0) {
-            let responseBody = {
-                status: "No golf course with id " + id
-            }
-            res.status(404).send(responseBody);
-        }
-        else {
-            res.send({ status: "Golf course with id " + id + " has been updated." });
-        }
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-})
-
-//--------------------------------------------------------------------------------------------------
-// Delete an existing golf course
-//--------------------------------------------------------------------------------------------------
-app.delete('/api/courses/:id', async (req, res) => {
-
-    // read the path parameter :id
-    let id = req.params.id;
-
-    try {
-        const collection = database.collection('golf_course');
-        const query = { golf_course_id: parseInt(id) }; // filter by id
-        const result = await collection.deleteOne(query);
-
-        if (result.deletedCount === 0) {
-            let responseBody = {
-                status: "No golf course with id " + id
-            }
-            res.status(404).send(responseBody);
-        }
-        else {
-            let responseBody = {
-                status: "Golf course with id " + id + " has been successfully deleted."
-            }
-            res.send(responseBody);
-        }
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-})
-
-//--------------------------------------------------------------------------------------------------
 // Get all players
 //--------------------------------------------------------------------------------------------------
 app.get('/api/players', async (req, res) => {
@@ -283,36 +203,6 @@ app.put('/api/players/:id', async (req, res) => {
         }
         else {
             res.send({ status: "Player with id " + id + " has been updated." });
-        }
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-})
-
-//--------------------------------------------------------------------------------------------------
-// Delete an existing player
-//--------------------------------------------------------------------------------------------------
-app.delete('/api/players/:id', async (req, res) => {
-
-    // read the path parameter :id
-    let id = req.params.id;
-
-    try {
-        const collection = database.collection('player');
-        const query = { id: parseInt(id) }; // filter by id
-        const result = await collection.deleteOne(query);
-
-        if (result.deletedCount === 0) {
-            let responseBody = {
-                status: "No player with id " + id
-            }
-            res.status(404).send(responseBody);
-        }
-        else {
-            let responseBody = {
-                status: "Player with id " + id + " has been successfully deleted."
-            }
-            res.send(responseBody);
         }
     } catch (error) {
         res.status(500).send({ error: error.message });
