@@ -48,9 +48,6 @@ app.get('/api', async (req, res) => {
 app.get('/api/courses', async (req, res) => {
     try {
         const collection = database.collection('golf_course');
-
-        // You can specify a query/filter here
-        // See https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/query-document/
         const query = {};
 
         // Get all objects that match the query
@@ -174,9 +171,6 @@ app.delete('/api/courses/:id', async (req, res) => {
 app.get('/api/players', async (req, res) => {
     try {
         const collection = database.collection('player');
-
-        // You can specify a query/filter here
-        // See https://www.mongodb.com/docs/drivers/node/current/fundamentals/crud/query-document/
         const query = {};
 
         // Get all objects that match the query
@@ -188,7 +182,7 @@ app.get('/api/players', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
-// Get a golf course by their id
+// Get a player by their id
 //--------------------------------------------------------------------------------------------------
 app.get('/api/player/:id', async (req, res) => {
 
@@ -245,7 +239,7 @@ app.get('/api/playersforcourse/:id', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
-// Create a new golf course
+// Create a new player
 //--------------------------------------------------------------------------------------------------
 app.post('/api/players', async (req, res) => {
 
@@ -267,7 +261,7 @@ app.post('/api/players', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
-// Update an existing golf course
+// Update an existing player
 //--------------------------------------------------------------------------------------------------
 app.put('/api/players/:id', async (req, res) => {
 
@@ -296,7 +290,7 @@ app.put('/api/players/:id', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
-// Delete an existing golf course
+// Delete an existing player
 //--------------------------------------------------------------------------------------------------
 app.delete('/api/players/:id', async (req, res) => {
 
@@ -326,7 +320,7 @@ app.delete('/api/players/:id', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
-// Get player for specific golf course
+// Get holes for specific golf course
 //--------------------------------------------------------------------------------------------------
 app.get('/api/holes/:id', async (req, res) => {
 
